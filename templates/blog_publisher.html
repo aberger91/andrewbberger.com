@@ -1,0 +1,43 @@
+{% extends 'blog_post.html' %}
+{% block body %}
+
+<form action="" class="form-inline" method="post">
+
+    Subject
+    {% if subject %}
+        <input size='52' type="text" class="form-control" placeholder="Subject" name="subject" value={{subject}}>
+    {% else %}
+        <input size='52' type="text" class="form-control" placeholder="Subject" name="subject" value="{{request.form.subject}}">
+    {% endif %}
+    <br>
+
+    Title
+    {% if title %}
+        <input size='52' type="text" class="form-control" placeholder="Title" name="title" value={{title}}>
+    {% else %}
+        <input size='52' type="text" class="form-control" placeholder="Title" name="title" value="{{request.form.title}}">
+    {% endif %}
+    <br> <br>
+    <table class='new-blog-post'>
+        <tr class='new-blog-post'>
+            <th> <input class='btn btn-default' type='submit' name='load' value='Load'> </th>
+            <th> <input class='btn btn-default' type='submit' name='save_as_html' value='Save HTML'></th>
+            <th> <input class='btn btn-default' type='submit' name='save_as_markdown' value='Save MD'></th>
+            <th> <input class='btn btn-default' type='submit' name='new' value='New'></th>
+            <th> <input class='btn btn-default' type='submit' name='delete' value='Delete'></th>
+            <th> <input class='btn btn-default' type='submit' name='publish_html' value='Publish HTML'></th>
+            <th> <input class='btn btn-default' type='submit' name='publish_md' value='Publish MD'></th>
+        </tr>
+    </table>
+    <br>
+
+    <div id='editor' class='new-blog-post'>
+        {% if content %}
+            <textarea name='blog-post'>{{ content }}</textarea> 
+        {% else %}
+            <textarea name='blog-post'></textarea> 
+        {% endif %}
+    </div>
+</form>
+
+{% endblock %}

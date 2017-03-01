@@ -1,0 +1,28 @@
+<html lang="en">
+{% from 'macros/_buttons.html' import stock_button %}
+
+<!-- Navbar -->
+{% include 'header.html' %}
+
+<!-- Top NavBar -->
+<div id='navbar-static' style="float:left; background-color:#002233; position:fixed; z-index:1; width:100%; top:50px">
+    {% for ticker, values in content.items() %}
+        {{ stock_button(ticker, values[0], values[1]) }}
+    {% endfor %}
+</div>
+
+<body>
+
+    <!-- Block Body -->
+    <div style='background-color:white; margin-top:5%' id="blog-panel">
+
+    </div>
+
+    {% include 'comments.html' %}
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

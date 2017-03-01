@@ -1,0 +1,44 @@
+<div id='blog-panel' style='background-color:white'>
+    <div id='title'>
+        Currency Converter
+        <hr>
+    </div>
+    <br> <br>
+
+    <div class="container">
+        <form action="" class="form" method="post">
+
+            <div id='text'>
+                You have:
+            </div>
+            <br> <br>
+            <div id="text">
+                Amount
+            <input style="width:240px" type="text" class="form-control" placeholder=1000000 name="ccy_amount" value="{{request.form.ccy_amount}}">
+            <br> <br>
+
+            <div id='text'>
+                Base CCY:
+            <select name="base_ccy" class="btn btn-default" style="font-weight:bold">
+                {% for ccy in ['AUD', 'CAD', 'EUR', 'JPY', 'GBP', 'NZD', 'MXN', 'USD', 'ZAR'] %}
+                    <option value={{ ccy }}> {{ ccy }} </option>
+                {% endfor %}
+            </select>
+            <br> <br>
+            </div>
+
+            <div id="text">
+                You want:
+            <select name="term_ccy" class="btn btn-default" style="font-weight:bold">
+                {% for ccy in ['AUD', 'CAD', 'EUR', 'JPY', 'GBP', 'NZD', 'MXN', 'USD', 'ZAR'] %}
+                    <option value={{ ccy }}> {{ ccy }} </option>
+                {% endfor %}
+            </select>
+            </div>
+            <br> <br>
+
+            <input class="btn btn-default" style="font-weight:bold"type="submit" value="Submit">
+        </form>
+        <hr>
+    </div>
+</div>

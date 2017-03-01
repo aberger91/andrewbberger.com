@@ -1,0 +1,47 @@
+{% macro button(path, title, _type) %}
+    <a id="button" href={{ url_for('blog_post', _type=_type, path=path, action='') }}>
+        {{ title }}
+    </a> <br>
+{% endmacro %}
+
+{% macro panel(link, image='') %}
+    <div style="padding: 25px 25px 25px 25px;" id='title'>
+        {{ button(link.path, link.title, link._type) }}
+    </div>
+{% endmacro %}
+
+{% macro title_link(title, url, id='title', target='_blank') %}
+    <div id={{ id }}>
+        <a target={{ target }} href={{ url }}>
+            {{ title }}
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro home_panel(subject, image='') %}
+    <div style="text-align:left; padding: 25px 10px 20px 10px;"id='title'>
+        <a style='float:right;border-right:thick solid #004455; padding: 0 25px 0 0;'id='button' href={{ url_for('subject_home', subject=subject) }}>
+            {{ subject.upper() }}
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro stock_button(ticker, price, change) %}
+    <ul class='stock-ticker-table'>
+        <li>
+            {{ ticker }}
+        </li>
+        <li>
+            {{ price }}
+        </li>
+        {% if change < 0 %}
+            <li style='color:red'>
+                ({{ change }} %)
+            </li>
+        {% else %}
+            <li style='color:green'>
+                ({{ change }} %)
+            </li>
+        {% endif %}
+    </ul>
+{% endmacro %}

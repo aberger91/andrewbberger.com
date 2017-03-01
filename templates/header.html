@@ -1,0 +1,74 @@
+<html lang='en'>
+{% from 'macros/modals/headers.html' import login_modal %}
+{% from 'macros/_buttons.html' import title_link %}
+{% from 'macros/_buttons.html' import stock_button %}
+{% from 'macros/_buttons.html' import button %}
+
+<head>
+    <meta charset="utf-8">
+    <title> andrewbberger </title>
+    <meta http-equiv='X-UA-Compatible' name="viewport" content="width=device-width, initial-scale=1, IE=edge,chrome=1">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono" rel='stylesheet'>
+	
+    {% for file in ['bootstrap_less', 'footer', 'custom', 'pygments'] %}
+        <link href={{ url_for('static', filename='/css/' + file + '.css') }} rel='stylesheet'>
+    {% endfor %}
+
+    {% for file in ['bootstrap.min', 'footer'] %}
+        <script type="text/javascript" src={{ url_for('static', filename='/js/' + file + '.js') }}></script>
+    {% endfor %}
+</head>
+
+<!-- Top NavBar -->
+<div id='navbar-floating' style='background: rgba(44, 44, 55, 0);'>
+
+    {% if header_title %}
+        {{ title_link(header_title, '#', id='navbar-code', target='_self') }}
+    {% endif %}
+
+    {% if header_subject %}
+        {{ title_link(header_subject, url_for('subject_home', subject=header_subject), id='md-navbar-code', target='_self') }}
+    {% endif %}
+
+    <!--{{ title_link('@andrewbberger', url_for('home'), id='navbar-code', target='_self') }}-->
+
+    {% if 'logged_in' in session %}
+        <div class='fl-right'>
+            {{ title_link('logout', url_for('logout'), id='navbar-code', target='_self') }}
+        </div>
+    {% endif %}
+    <div style='float:right' id='md-navbar-code'>
+      {% if session.get('username') %} 
+        <a href={{ url_for('home') }}>
+          Hello, {{ session.get('username') }}!
+        </a>
+      {% else %} 
+        {{ login_modal('Login') }}
+        <!--<a role="presentation" data-toggle="modal" data-target="#Login" href="#">-->
+
+        <a href={{ url_for('home') }}>
+            Hello, Guest!
+        </a>
+      {% endif %}
+    </div>
+</div>
+
+<!-- Flash messages -->
+<div class='border-row'>
+    <div class='container-fluid' align='center'>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div style='margin-top:3%'class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">
+                      ×
+                  </span>
+              </button>
+              {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div id='title'>
+    Oanda FX API - Getting Started
+    <hr>
+</div>
+
+<div id='text'>
+
+    In this tutorial I'm going to explain how to write a simple automated trading 
+    algorithm in Python with a package I wrote called the Oanda FX REST API.
+
+    <br> <br>
+
+    Oanda is an online, commission-free, foreign exchange broker based in Canada. 
+    In my experience, they have one of the most straightforward APIs for getting started with automated trading.
+
+    <br> <br>
+
+    My wrapper provides the API endpoints, handles JSON responses, accesses the FX data, and allows for quick-and-dirty trading algorithm creation.
+
+    <br> <br>
+
+    If you want to follow this tutorial, I recommend you <a target='_blank' href='http://www.oanda.com'> sign-up </a> for a practice account (no credit card signup required, just username and email) and request an API token.
+
+    <br> <br>
+    To get started quickly, clone my <a target='_blank' href='http://github.com/abberger1/fx-algo'> repository </a> on github and pip install!
+</div>
+
+<div id='title'>
+    <hr>
+    Download Packages from GitHub
+</div>
+
+<div id='text'>
+    <br>
+    <code> git clone http://github.com/aberger91/oanda_fx_api</code>
+    <br> <br>
+    <code> cd oanda_fx_api && pip install . </code>
+
+    <br> <br>
+    <strong> Required: </strong>
+<div class='highlight'> <pre>
+    requests
+    pandas
+    statsmodels
+    bokeh
+</pre> </div>
+
+    You may also download the Oanda desktop client - when we are finished with this tutorial you would be able to watch your algorithm trade in real-time from here.
+    <br> <br>
+
+    <div class='crop'>
+        <img src='http://s3.amazonaws.com/quantstart/media/images/qs-oanda-forex-fxtrade-practice.png'>
+    </div>
+</div>
+
+<div id='title'>
+    <hr>
+    Creating an Account and an API Access Token
+</div>
+
+<div id='text'>
+    <br> <br>
+    There is a link on your OANDA fxTrade account profile page titled “Manage API Access” (My Account -> My Services -> Manage API Access). 
+    From there, you can generate a personal access token to use with the OANDA API, as well as revoke a token you may currently have.
+
+    
+    <br> <br>
+    Once you have the token and a unique user id, set each to an environment variable on your system, 
+    respectively OANDA_FX_USER and OANDA_FX_API.
+    <br> <br>
+    Storing the API token and user id will prevent us from storing the credentials in plaintext, 
+    however they will be accessible to anyone with access to your machine via these two environment variables.
+
+    <br> <br>
+    <code> OANDA_FX_USER=YOUR_USER_ID </code>
+    <br>
+    <code> OANDA_FX_KEY=YOUR_TOKEN </code>
+</div>
+
+<div id='title'>
+    <hr>
+    Stream FX Rates
+</div>
+
+<div id='text'>
+    <br>
+    Once these variables are set, we're ready to start trading.
+    Let's start by fetching some foreign exchange prices from the API.
+
+    <br>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">oanda_fx_api</span> <span class="kn">as</span> <span class="nn">ofx</span>
+                            
+<span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;EUR_USD&#39;</span>
+
+<span class="n">acc</span> <span class="o">=</span> <span class="n">ofx</span><span class="o">.</span><span class="n">Account</span><span class="p">()</span>
+<span class="n">dat</span> <span class="o">=</span> <span class="n">ofx</span><span class="o">.</span><span class="n">GetCandles</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">dat</span><span class="p">[[</span><span class="s1">&#39;closeBid&#39;</span><span class="p">,</span> <span class="s1">&#39;closeAsk&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+
+    <hr>
+    Continue to the next tutorial to see the output!
+
+</div>

@@ -1,0 +1,71 @@
+<div id='title'>
+    Yahoo Finance Charts
+</div>
+
+<div class='row'>
+    <div class='col-md-4'style='text-align:center'>
+    </div>
+    <div class='col-md-4'style='text-align:center'>
+        <form action="" method='post'>
+            <label>
+                Ticker
+                <input class='form-control' style='width:75px' type='text' name='ticker' value={{ request.form.ticker }}>
+            </label>
+
+            <br>
+            <label>
+                Year
+                <input class='form-control' style='width:100px' type='text' name='year' value={{ request.form.year }}>
+            </label>
+            <br>
+
+            <label>
+                Month
+                <input class='form-control' style='width:100px' type='text' name='month' value={{ request.form.month }}>
+            </label>
+            <br>
+
+            <label>
+                Day
+                <input class='form-control' style='width: 100px' type='text' name='day' value={{ request.form.day }}>
+            </label>
+
+            <br> <br>
+            <label>
+                <input type='checkbox' name='sma' value="1">
+                Simple Moving Average
+            </label>
+            <br>
+
+            <label>
+                <input type='checkbox' name='ewma' value="1">
+                Exponential Weighted Moving Average
+            </label>
+            <br>
+
+            <label>
+                <input type='checkbox' name='bbands' value="1">
+                Bollinger Bands
+            </label>
+            <br>
+
+            <label>
+                <input type='checkbox' name='stoch' value="1">
+                Stochastic K&D Oscillator
+            </label>
+            <br>
+
+            <br>
+            <label>
+                Period
+                <input class='form-control' style='width: 100px' type='text' name='period' value={{ request.form.period }}>
+            </label>
+
+            <br>
+            <input class='btn btn-default' type='submit' value='Go'>
+        </form>
+    </div>
+    <div class='col-md-4'style='text-align:center'>
+    </div>
+
+</div>

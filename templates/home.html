@@ -1,0 +1,42 @@
+{% from "macros/_buttons.html" import home_panel %}
+{% from "macros/_buttons.html" import title_link %}
+{% from "macros/_buttons.html" import panel %}
+
+<!-- Navbar -->
+{% include 'header.html' %}
+
+{% if featured_post %}
+    <div style='box-shadow: 5px 10px 10px black; margin-top:3%' id="blog-panel">
+        {{ title_link(' featured post: ' + featured_post.title.lower(), url_for('blog_post', _type=header_title, path=featured_post._title)) }}
+        <div style='text-align:right'>
+            edited {{ featured_post._time }}
+        </div>
+    </div>
+{% endif %}
+
+<div style='box-shadow: 5px 10px 10px black; margin-top:5%' id="blog-panel">
+    <div class="row">
+        <div class="col-md-6" >
+            {% if subject_posts %}
+                {% for link in subject_posts %}
+                    {{ panel( link ) }}
+                {% endfor %}
+            {% else %}
+                {{ title_link('Welcome to my website!', url_for('blog_post', _type='about', path='about')) }}
+                <br> <br>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <div class='crop'>
+                <img style="margin: 0 0 5% 0; border: thick solid black; border-radius:50%;" src={{ '/static/images/' + picture|safe }}>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+{% include 'footer.html' %}
+
+{% include "_footer_bar.html" %}
+</html>

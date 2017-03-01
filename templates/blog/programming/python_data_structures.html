@@ -1,0 +1,265 @@
+<div id='title'>
+    Python Data Structures
+   <pre><code> Andrew Berger Dec. 2, 2016 </code></pre>
+</div>
+
+<div id='title'> Dictionaries
+ </div>
+
+<div id='text'>
+    Dictionaries in Python are associative arrays, pairs of keys and values. The keys must be hashable and
+    immutable, but the values may be heterogeneous.
+    Dicts have a larger memory footprint than lists, taking up an initial 288 bytes, but a faster lookup time
+    ( O(n) vs. O(log n) ) compared to lists due to the efficient CPython hash function.
+    You can create dictionaries with the <code> dict() </code> constructor, or use curly braces to instantiate
+    a dict: <code> d = {} </code>.
+</div>
+
+<p><br></p>
+<div class='crop'>
+    <img src=/static/images/dictionary_1.PNG>
+</div>
+
+
+<hr>
+<div id='text'>
+Another way to create a dict is from a zipped list.
+</div>
+<br>
+
+<div class="codehilite"><pre><span class="o">>></span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'matthew'</span><span class="p">,</span> <span class="s1">'james'</span><span class="p">,</span> <span class="s1">'megan'</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">,</span> <span class="s1">'susan'</span><span class="p">]</span>
+<span class="o">>></span> <span class="n">weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">235</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="mi">111</span><span class="p">]</span>
+<span class="o">>></span> <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">weight</span><span class="p">))</span>
+<span class="o">>></span> <span class="n">d</span>
+<span class="p">{</span><span class="s1">'matthew'</span><span class="p">:</span> <span class="mi">235</span><span class="p">,</span> <span class="s1">'james'</span><span class="p">:</span> <span class="mi">156</span><span class="p">,</span> <span class="s1">'megan'</span><span class="p">:</span> <span class="mi">96</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">:</span> <span class="mi">183</span><span class="p">,</span> <span class="s1">'susan'</span><span class="p">:</span> <span class="mi">111</span><span class="p">}</span> 
+<span class="o">>></span> <span class="n">d</span><span class="p">[</span><span class="s1">'matthew'</span><span class="p">]</span>
+<span class="mi">235</span>
+<span class="o">>></span> <span class="n">d</span><span class="p">[</span><span class="s1">'john'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">349</span>
+<span class="o">>></span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">dict_keys</span><span class="p">([</span><span class="s1">'matthew'</span><span class="p">,</span> <span class="s1">'james'</span><span class="p">,</span> <span class="s1">'megan'</span><span class="p">,</span> <span class="s1">'bob'</span><span class="p">,</span> <span class="s1">'susan'</span><span class="p">,</span> <span class="s1">'john'</span><span class="p">])</span>
+</pre></div>
+
+
+<div id='text'>
+<br>
+You can set and get values from dictionaries using indexing with brackets similar to lists, however instead of positional integers, indices can be strings or any other immutable object.
+</div>
+<hr>
+
+<div id='title'> Lists vs. Tuples
+ </div>
+
+<div id='text'>
+
+    This tutorial will investigate the differences between the Python list
+    and the tuple data structures, and compare scenarios where each would be
+    better off than the other.
+    <hr>
+
+    In Python, lists and tuples are array-like containers allowing for the organized storage
+    of multiple values. They include the string <code> str </code> data type as well.
+
+    <br> <br>
+
+    You can create a list or a tuple by using the <code> list() </code> and
+    <code> tuple() </code> constructor, or simply by assigning a variable 
+    to square-brackets for a list, or parenthesis for a tuple.
+
+    <br> <br>
+
+    <div><pre>
+li = list()
+tu = tuple()
+
+#  equivalent
+
+li = []
+tu = ()
+</pre></div>
+    
+    <br>
+
+    Lists are automatically allocated with 64 bytes of memory, while tuples
+    take up 48. Tuples are more lightweight, and they are also faster. 
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_1.PNG'>
+    </div>
+    
+    <br> <br>
+    Similar to other mutable Python data structures, lists are dynamic, meaning that Python
+    takes care of the memory management when the size of the container becomes larger than initially allocated.
+Tuples won't ever change in size because they can't be modified once they're created.
+    
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_getsizeof.PNG'>
+    </div>
+
+    <br> <br>
+
+    In the image above, we can see that after the first integer was appended to the list, Python allocated
+    an additional 32 bytes, or room for 4 more integers. On the fourth iteration, the list is at capacity
+    and allocates another 32 bytes. This process continues until the list reaches overflow or an error occurs.
+
+    <br> <br>
+
+    You can assign values to the list or tuple by separating them with a comma.
+    Lists and tuples can store different data types in the same container and are 
+actually arrays of pointers to objects under the CPython hood.
+
+<br> <br>
+The CPython implementation of the Python list object actually looks like this:
+<br>
+<pre> <code>
+typedef struct {
+    PyObject_HEAD
+    Py_ssize_t ob_size;
+
+    /* Vector of pointers to list elements.  list[0] is ob_item[0], etc. */
+    PyObject **ob_item;
+
+    /* ob_item contains space for 'allocated' elements.  The number
+     * currently in use is ob_size.
+     * Invariants:
+     *     0 <= ob_size <= allocated
+     *     len(list) == ob_size
+     *     ob_item == NULL implies ob_size == allocated == 0
+     */
+    Py_ssize_t allocated;
+} PyListObject;
+</pre></code>
+
+Where PyObject_HEAD is a reference count and contains type information.
+The implementation for the resizing of lists is in a file called listobject.c.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_2.PNG'>
+    </div>
+
+    <br>
+
+    The values from lists and tuples are accessed in the same way. They can be indexed
+    or spliced by using square brackets and the numerical index that corresponds to the
+    position of the value. 
+    Indices start at zero, meaning that the first value of the list has the
+    index 0. In our example, <code> li[0] = 41 </code> You can use negative numbers to 
+    access the list or tuple from the opposite side.
+
+    <br> <br>
+
+    To index a subset of the container, or splice the list or tuple, you can use a colon
+    long with an integer of the position from which you wish to splice. Splicing also
+    works with reverse indexing! Give it a try.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_3.PNG'>
+    </div>
+
+    <br>
+
+    We have covered the similarities of lists and tuples but you may be wondering 
+    what the differences are!
+
+    <br> <br>
+
+    The major difference between lists and tuples in Python is that lists are mutable
+    (they can be changed during runtime) while tuples are immutable. Attempting to modify
+    a tuple raises an exception. Trust me.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_4.PNG'>
+    </div>
+
+    <br>
+
+    Another notable difference is the way lists and tuples are commonly used.
+    Lists are conventionally used to store homogenous data types, similar to
+    C-style arrays, while tuples are used to store heterogenous, or different types,
+    of data and can resemble C-style structs. Tuples are better when the data 
+    is stored <em> positionally </em>, for example, points on a mathematical plane or Cartesian products.
+
+    <br> <br>
+
+    Lists are convenient and famous! for their list comprehension syntax, while tuples
+    are convenient for unpacking. CPython actually interprets non-keyword arguments passed to functions
+    as tuples. 
+
+    <br> <br>
+
+    Using the list comprehension syntax with a tuple actually results in creating what 
+    is called a generator! And a generator is not a tuple ... List comprehensions
+    are convenient and a readable way to create lists and assign values at the same time.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_6.PNG'>
+    </div>
+
+    <br>
+
+    Tuples are slightly more lightweight and optimized for performance since the
+    Python interpreter knows it will not have to change the original data structure.
+
+    <br> <br>
+
+    The list has built-in methods like append, insert, pop, remove, and reverse which 
+    make them easier to manipulate. 
+
+    <br> <br>
+
+    A more comprehensive selection of methods for the list:
+    <br> 
+
+    <li> append </li>
+    <li> clear </li>
+    <li> copy </li>
+    <li> count </li>
+    <li> extend </li>
+    <li> index </li>
+    <li> insert </li>
+    <li> pop </li>
+    <li> reverse </li>
+    <li> sort </li>
+
+    <br>
+
+    To create a list of lists or a tuple of tuples in Python, do NOT use the syntax: <code> list_of_lists = [ [] * 8 ] </code>.
+    To CPython this syntax means to create 8 references to the same list, so changing any list within our list of lists
+    will modify all of the lists! Instead, do: <code> list_of_lists = [ [] for x in range(8) ] </code>. Using a list comprehension
+    with the built-in range function will assure we are making unique lists within our list. The same principle goes for tuples.
+
+    <br> <br>
+
+    The collections module offers a data structure called the <code> namedtuple </code>,
+    which provides an associative-array-like feel to the tuple. An associative array
+    is just a mapping between keys and values, but is more convenient (in some cases)
+    where you would want to access the values as attributes, rather than an integer.
+    The namedtuple is a factory function that allows you to access tuple values using
+    attribute syntax. The namedtuple is more similar to a dictionary than a list.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/lists_tuples_5.PNG'>
+    </div>
+
+    <br>
+
+    When you know you are not going to be modifying the variables
+    in your container, use a tuple. They are more efficient, lightweight, and will
+    guarantee that you are not accidently modifying the values!
+
+    <br> <br>
+
+</div>

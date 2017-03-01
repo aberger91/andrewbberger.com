@@ -1,0 +1,263 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    font-family:"Ubuntu Mono";
+    font-weight:bold;
+    background-image: url('http://andrewbberger.com/static/images/chicago_smokey.jpg');
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+a:hover, a:focus, a:active a:visited {
+    text-decoration: none;
+}
+
+pre {
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+code {
+    color: black;
+    font-weight: bold;
+}
+
+i {
+    padding: 5px 5px 5px 5px;
+    color: blue;
+    float:right;
+}
+
+.fl-left {
+    float: left;
+}
+
+.fl-right {
+    float:right;
+}
+
+.row {
+    margin: 2% 2% 2% 2%;
+}
+
+.bk-root, .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:0;
+}
+
+.new-blog-post table {
+    width: 100%;
+    float: right;
+}
+
+.codehilite pre, #title pre code, .title pre code {
+    font-size: 16px;
+}
+
+.stock-ticker-table {
+    list-style-type: none;
+    float: left;
+}
+
+.stock-ticker-table li {
+    color: white;
+}
+
+#title pre {
+    text-align: center;
+}
+
+a, em, #button:hover, #base-color {
+    color: midnightblue;
+}
+
+.fixed {
+    top: 0px;
+    position: fixed;
+}
+
+#text, #text ul li, #text ol li {
+    text-align: left;
+    margin-left:5%;
+    margin-right:5%;
+}
+
+#title, .title, h2 {
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (min-width: 832px) {
+    body {
+        margin: 0 15% 0 15%;
+    }
+
+    #title .title, pre, h2 pre {
+        //margin-left: 80%;
+    }
+    
+    .new-blog-post textarea {
+        width: 95%;
+        height: 95%;
+        font-size: 16;
+    }
+
+    .crop {
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .crop img {
+        height: auto;
+        max-width: 100%;
+        max-height:100%;
+        vertical-align:middle;
+    }
+
+    #button {
+        font-size: 24px;
+        color:black;
+    }
+
+    .container-custom {
+        margin-left: 15%;
+        margin-right: 15%;
+        padding: 0;
+    }
+
+    .blog-panel, #blog-panel {
+        padding: 5px 5px 5px 5px;
+        background-color: white;
+        margin: 1% 10% 1% 10%;
+    }
+
+    #title em, .title em, h2 em {
+        color:#000055;
+        text-align: center;
+        font-weight: bold;
+        font-size: 55%;
+    }
+
+    .hide-on-large {
+        display: none;
+    }
+
+    #title, .title, h2 {
+        font-size: 36px;
+    }
+
+    #text {
+        font-size: 22px;
+    }
+
+
+    #text div pre {
+        font-size: 14px;
+    }
+
+    #business-card ul li a {
+        text-align: center;
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+
+}
+
+
+@media (max-width: 832px) {
+    body {
+        margin: none;
+    }
+
+    .highlight pre span {
+        font-size: 12px;
+    }
+
+    .row {
+        font-size: 55%;
+    }
+
+    .crop {
+        overflow: hidden;
+    }
+
+    .crop img {
+        height: auto;
+        max-width: 100%;
+        max-height:100%;
+        vertical-align:middle;
+    }
+
+    .new-blog-post textarea {
+        width: 100%;
+        height: 100%;
+        font-size: 12;
+    }
+
+    abbr {
+        border-bottom: none;
+        text-align: center; 
+        font-size: 24px;
+    }
+
+    #button {
+        font-size: 16px;
+        color:black;
+    }
+
+    #title em, .title em, h2 em {
+        color:#000055;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18;
+    }
+    
+    .blog-panel, #blog-panel {
+        background-color: #ECECEC;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 50px 0 0 0;
+        font-size: 75%;
+    }
+
+    .container, .container-fluid {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .hide-on-small {
+        display:none;
+    }
+
+    #title, .title, h2 {
+        font-size: 18px;
+    }
+
+    #title a, .title a, h2 a {
+        font-size: 100%;
+    }
+
+    #text {
+        font-size: 14px;
+    }
+
+    #text div pre {
+        font-size: 18px;
+    }
+
+    #business-card ul li a {
+        text-align: center;
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 14px;
+        font-weight: bold;
+    }
+}

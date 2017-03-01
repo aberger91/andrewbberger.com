@@ -1,0 +1,15 @@
+{% extends 'blog_post.html' %}
+{% block body %}
+
+
+<div class='container-fluid' align='center'>
+
+    <div id='text'>
+        <p id='base-color'> Woah, that page doesn't even exist! </p>
+    </div>
+
+    <img src='{{ url_for('static',filename='/images/stormtrooper_404.jpg')}}'>
+
+</div>
+
+{% endblock %}

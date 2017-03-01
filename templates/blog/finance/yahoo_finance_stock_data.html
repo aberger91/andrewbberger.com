@@ -1,0 +1,279 @@
+<div id='title'>
+    Yahoo Finance Data using Python vs. Microsoft Excel
+    <br>
+    <pre><code> Andrew Berger Nov. 7, 2016 </code></pre>
+</div>
+
+<div id='text'>
+
+    <hr>
+
+    This tutorial will show how to pull data from yahoo finance using the pandas module
+    for Python, and compare the same method using Excel. I'm assuming you have a 
+basic understanding of Excel here. You do not require any Python knowledge to read this tutorial. In fact,
+I would be happy to convince you to use Python <em> instead </em> of Excel in this example.
+Ok! So now let's begin.
+
+    <br> <br>
+
+    Coming from an finance/economics background, I began my data science journey
+    using mostly Microsoft Excel. But when I discovered the power of the Python module called pandas -
+    especially DataFrames - I never wanted to turn back.
+
+    <hr>
+
+Once some version of Python is installed on your system, open up a command line terminal and type <code> python -V </code>
+to confirm the version of Python you are using. If you installed on Windows you might have to type <code> py -3.6 -V </code>, or 2.7, depending on
+which version you installed. Now use the Python package manager called 'pip' to install pandas by typing <code> pip install pandas </code> 
+on the command line. You should see a bunch of stuff downloading on the terminal. That's perfect.
+
+<br> <br>
+
+Pandas is an open-source library for Python developed for working with financial data and computing. That just
+means that it allows you to import a bunch of pre-defined classes and functions into a Python namespace, like this:
+<code> import pandas as pd </code>, or <code> from pandas import DataFrame </code>.
+
+    <br> <br>
+
+<div id='title'> Download Yahoo Stock Data with Python </div>
+
+    Here is an example of downloading daily OHLC market data for the E-Mini S&P stock,
+    using only the pandas module in Python. Pandas should come with the pandas_datareader
+submodule, but if it doesn't, you can clone the git repository <a target='_blank' href='https://github.com/pydata/pandas-datareader'> here </a>.
+After installing and/or unzipping the files, enter the parent directory in the command line and type <code> python setup.py install </code>.
+
+    <hr>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_1.PNG'>
+    </div>
+
+    <br> <br>
+
+<div id='title'> Pandas DataFrames</div>
+    Resembling the R dataframe, a pandas.DataFrame is a two-dimensional, heterogeneous data structure with labeled axes 
+    (rows and columns). In Python terms, it can be compared to a dictionary of lists, arrays, tuples, or other dictionaries. 
+    The DataFrame builds off of the pandas.Series, which is like an indexed and labeled dictionary. Dataframes are kind of like
+Excel spreadsheets, without all the noise. You can operate on columns, filter through rows, create new columns, and 
+much, much more.
+
+    <br> <br>
+
+    Instantiate an empty DataFrame: <code> df = pd.DataFrame </code>, create one
+    from a dictionary of lists: <code> df = pd.DataFrame(dict_of_lists) </code>, and even
+    with a dict comprehension: <code> df = pd.DataFrame({x: [x+1, x*2, x/2, x-1] for x in range(100)}) </code>.
+
+    <br> <br>
+
+    However, my favorite way to use a <code> pandas.DataFrame </code> is with the <code> pandas.read_csv  </code>
+method, allowing the programmer to read in comma separated value files seamlessly. Many online APIs, such as
+Quandl, provide built-in functionality for working with pandas objects.
+
+<br> <br>
+
+    To view the header (columns) of our data, use the method <code> DataFrame.columns </code>.
+
+    <br> <br>
+
+The index of the DataFrame is similar to the first column of a spreadsheet. The index is the
+'backbone' of the data.
+    To return the index, just use the method <code> DataFrame.index </code>.
+    Depending on the nature of the data, the index may be a DateTimeIndex, a numpy array, an enumerated
+    index, or any other type of data. The default is an enumerated (numerical) index. 
+
+    <br><br>
+
+    Using the <code> pandas_datareader.data.DataReader </code> function allows us to pull massive amounts
+    of data from yahoo finance. We can pass lists of symbols to the first argument
+    to return the <code> pd.Panel </code> structure. We can also obtain economic data from the St. Louis
+    Federal Reserve by passing <code> 'FRED' </code> to the second argument.
+
+    <br> <br>
+
+<div id='title'> Python vs. Excel </div>
+Now I'm going to begin comparing two methods of retrieving online stock data: 
+<br> <br>
+<ol>
+<li> streaming the data into an Excel spreadsheet </li>
+<li> streaming the data into Python using pandas </li>
+</ol>
+
+<br> <br>
+
+My method of streaming the data into Excel actually just involves downloading the data manually 
+from <a target='_blank' href='https://finance.yahoo.com'> finance.yahoo.com </a>. In a future post
+I would like to demonstrate how to use VBA to stream the data.
+
+<br> <br>
+
+    To load S&P 500 stock data in Excel, we open a web browser, navigate to the yahoo finance
+    webpage ,click the download button, and open the file in Excel from our downloads
+    folder. One of the main differences between streaming the data this way in Excel (versus the Python method) is
+that it requires we <em> save </em> the file
+    on our system storage. In Python, the data is loaded in RAM memory, and is automatically removed 
+    when Python exits. Python is nice because it does garbage collection for us. It doesn't bite.
+
+    <hr>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_1.5.PNG'>
+    </div>
+
+    <hr>
+
+Although there is a small learning curve associated with using our Python method, my first argument is
+that excel formulas can get very complicated very quickly. Whether it be tracking down cell 
+    references and vlookup tables, or trying to find out why Excel is telling us our formula is incomplete.
+    Visual-Basic for Applications (VBA) code is notoriously difficult to debug. Python will 
+    give us a traceback, which tells us exactly which line of code to look at when debugging.
+
+    <br> <br>
+
+    Here we have the yahoo stock data in Excel:
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_1.75.PNG'>
+    </div>
+
+    <br><br>
+
+    In Python, we can plot the dividend-adjusted closing price for our stock data in the interactive
+    jupyter qtconsole shell. We can also calculate a moving average using the pandas
+    function <code> pd.rolling_mean </code>. All of the above takes only 3 lines of code.
+    Opposed to Excel, none of this data is even stored on our computer's hard drive memory yet.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_2.PNG'>
+    </div>
+
+    <hr>
+
+    In Excel, we are navigating with the mouse cursor selecting two columns and then clicking
+    'Insert' to insert a line graph for our Adjusted Close column. Maybe you are really good with hotkeys
+in Excel, and that's great, but would still argue that Python is smoother with our 3 lines of code and 
+RAM-stored stock data.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_2.5.PNG'>
+    </div>
+
+    <hr>
+
+    In my experience, using the pandas DataFrame instead of Excel is a more convenient,
+    readable, and especially scalable method of manipulating tabular and comma-separated value data.
+
+    <br> <br>
+
+    We can calculate the daily range (close - open) of the S&P 500 stock in one more line, and plot the volume
+    as well.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_3.PNG'>
+    </div>
+
+    <hr>
+
+    Here we compute the returns on the dividend-adjusted closing price using a convenient method
+    from the <code> pd.Series </code> structure called <code> pct_change </code>. Notice the labelled indices
+    are very similar to how Python dictionaries are accessed.
+
+    <br> <br>
+    
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_4.PNG'>
+    </div>
+
+    <br><br>
+    Here is just an example of the equivalent in Excel.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_3.5.PNG'>
+    </div>
+
+    <hr><br>
+
+<div id='title'> Afterwards: Applying Python </div>
+    If you are like me and you still need to use Excel for your job or research but are also 
+    looking for a more efficient or automated alternative to working with spreadsheet-like data -
+    you should learn Python with pandas!
+
+    <br> <br>
+
+    Another great plus to using pandas DataFrame in conjunction with Excel is the <code> pd.to_csv </code>
+    method. This method allows a user to save a DataFrame (including headers and index) into a 
+    comma-separated value format, readable from Excel. Likewise, <code> pd.read_csv </code> can be
+    useful to stream a CSV file into a DataFrame.
+
+    <br> <br>
+
+    Pandas allows easy access to other database formats, including SQL with a <code> DataFrame.to_sql </code>
+    method, and HDF5, with <code> pd.read_hdf </code>. DataFrames support relational database-like queries
+    with boolean indexing and provide methods for JOIN and MERGE operations.
+
+    <hr> <br>
+
+    Best of all, the DataFrame comes equipped with statistical methods, like mean, std, and median. There is also a
+    <code> Series.corr </code> method for computing the pairwise corrlation of columns.
+
+    <hr>
+
+    To view summary statistics of the columns in our DataFrame, use the method <code> DataFrame.describe </code>.
+
+    <br> <br>
+
+    We can plot all of the <code> pd.Series </code> that comprise our <code> pd.DataFrame </code>,
+    using the keyward argument <code> subplots </code> in the <code> plot </code> method.
+
+    <br> <br>
+
+    <div class='crop'>
+        <img src='/static//images/pandas_dataframe_5.PNG'>
+    </div>
+
+    <br><br>
+
+    We can avoid iterating in Python for loops in pandas by using vectorized operations to add columns of DataFrames together,
+    and even apply operations on entire DataFrames with methods like <code> .mean </code>, <code> .median </code>, <code> .std </code>.
+
+    <hr> <br>
+
+    If you have practical experience working with data, you know it is often messy,
+    containing missing values, and may require some parsing to get into the right format.
+    DataFrames are built to work with missing ('nan') values, providing the <code> Series.fillna </code>
+    and <code> Series.apply </code> methods to subdue the effects of chaotic data.
+    
+    <hr>
+
+<div id='title'> Using Python at Work in Finance </div>
+
+Besides looking at equities data, you can do a lot more with Python! Commonly used as a scripting language, Python is great for
+automating tasks on your computer. You can do almost anything, from creating a GUI, hosting a web server, downloading
+media from the internet, etc ... Hopefully this tutorial and other tutorials online can lead you in the right direction!
+
+<br> <br>
+
+    One of the first Python projects I implemented at work solved a problem that involved opening about ten different
+    Excel spreadsheets, extracting a particular cell from each spreadsheet, and compiling a table of all the cells
+    to input into another 'master' spreadsheet. The effort required to open over about ten different Excel files,
+    find the one cell that we wanted to extract from each one, and then manually input each value was time-consuming, 
+    created clutter in the workspace, and - most importantly - often led to human error in reporting.
+
+    <br> <br>
+
+    I solved this problem with Python at work, and the effects were noticed immediately. The result
+    was a Python program allowing us to double-click on my executable file and copy and paste the values into
+    our master table. Not only did this save us time, but it also looked great during my 6-month review!
+
+    <hr>
+
+</div>

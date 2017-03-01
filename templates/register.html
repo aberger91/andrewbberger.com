@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+
+<div class="container" style='text-align:center; margin-top:5%'>
+
+    <div id='title'>
+        Registration
+    </div>
+    <hr>
+    
+    {% from "macros/_formhelpers.html" import render_field %}
+    <form method=post action="">
+        <dl>
+            {{render_field(form.username)}}
+            {{render_field(form.email)}}
+            <br>
+            {{render_field(form.password)}}
+            {{render_field(form.confirm)}}
+            <br>
+            <div style='font-size: 12'>
+                {{render_field(form.accept_tos)}}
+            </div>
+        </dl>
+        <input id='base-color' class='btn btn-default' type=submit value=Register>
+    </form>
+    
+    {% if error %}
+        <p class="error"><strong>Error:</strong>{{error}}</p>
+    {% endif %}
+        
+</div>
+{% include 'footerBar.html' %}

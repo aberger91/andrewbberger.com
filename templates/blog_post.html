@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+    <body>
+
+        <!-- Block Body -->
+        <div style='box-shadow: 5px 10px 10px black; margin-top:5%' id="blog-panel">
+
+            {% if blog_content %}
+                {{ blog_content }}
+            {% else %}
+                {% block body %}
+                {% endblock %}
+            {% endif %}
+
+            {% if plot_html %}
+            <div class='crop'>
+                {{ plot_html|safe }}
+            </div>
+            {% endif %}
+
+        </div>
+        {% include 'comments.html' %}
+
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        {% include "_footer_bar.html" %}
+
+    </body>
+</html>

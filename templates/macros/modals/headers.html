@@ -1,0 +1,75 @@
+{% macro login_modal(id) %}
+    <div class="modal fade" id={{ id }} tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="title">{{ id }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                    
+                        <form action="/login/" class="form-inline" method="post">
+                            <input id='base-color' type="text" class="form-control" placeholder="Username" name="username" value="">
+                            <input type="password" class="form-control" placeholder="Password" name="password" value="">
+                            <input id='base-color' class="btn btn-default" type="submit" value={{ id }}>
+                        </form>
+                        
+                        <br>
+                        <p>No account? <a id='base-color' href='/register/'>Register here!</a></p>
+                        <br>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro register_modal(id) %}
+    <div class="modal fade" id={{ id }} tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="title">Registration</h4>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="container-fluid" align=center>
+                    
+                        <form method=post action="/register/">
+                            <dl>
+                                <dt id='base-color'><label for="username">Username</label>
+                                <dd><input id="username" name="username" type="text" value="">
+                                </dd>
+                                <dt id='base-color'><label for="email">Email Address</label>
+                                <dd><input id="email" name="email" type="text" value="">
+                                </dd>
+                            </dl>
+                            <br>
+                            <dl>
+                                <dt id='base-color'><label for="password">New Password</label>
+                                <dd><input id="password" name="password" type="password" value="">
+                                </dd>
+                                <dt id='base-color'><label for="confirm">Repeat Password</label>
+                                <dd><input id="confirm" name="confirm" type="password" value="">
+                                </dd>
+                                                                                      
+                                <dt><label style='font-size: 10' for="accept_tos"><br> I accept the <br>
+                                    <a id='base-color' href="/about/tos" target="blank">Terms of Service</a> and <a id='base-color' href="/about/privacy" target="blank">Privacy Notice</a> 
+                                    <br> (updated Oct. 14, 2016)</label>
+                                <dd><input id="accept_tos" name="accept_tos" type="checkbox" value="y">
+                                </dd>
+                            </dl>
+                            <p><input id='base-color' type=submit value={{ id + '!'}} ></p>
+                        </form>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

@@ -1,0 +1,38 @@
+{% from "macros/_buttons.html" import title_link %}
+{% from "macros/_buttons.html" import home_panel %}
+<div style='box-shadow: 5px 10px 10px black; margin:5% 5% 15% 5%' id="blog-panel">
+
+    <div class='row'>
+        <div class='col-md-6 col-xs-12'>
+            <div id='business-card'>
+                <ul style='text-align:center;list-style-type:none; margin-top:5%'>
+                    <li style='text-align:left'>
+                        {{ title_link('Andrew Berger', url_for('blog_post', _type='about', path='about'), id='') }}
+                    </li>
+                    <li style='text-align:left'>
+                        {{ title_link('INTL FC Stone', 'https://intlfcstone.com', id='') }}
+                    </li>
+                    <li style='text-align:left'>
+                        {{ title_link('OTC Operations Analyst', 'https://www.intlfcstone.com/Main-Channels/OTC-Products/', id='') }}
+                    </li>
+                    <li style='text-align:left'>
+                        {{ title_link('Chicago, IL', '#', id='', target='_self') }}
+                    </li> <br>
+                    <li style='text-align:left'>
+                        {{ title_link('andrewbberger@LinkedIn.com', 'https://www.linkedin.com/in/andrew-berger-11604a8b', id='') }}
+                    </li>
+                    <li style='text-align:left'>
+                        {{ title_link('andrewbberger@github.com', 'https://www.github.com/aberger91', id='') }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class='col-md-6 col-xs-12'>
+            {% for subject in ['programming', 'finance', 'applications', 'about'] %}
+                {{ home_panel(subject) }}
+            {% endfor %}
+        </div>
+
+    </div>
+</div>

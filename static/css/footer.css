@@ -1,0 +1,169 @@
+#comments-button {
+    background: rgba(0, 0, 0, 0);
+    background-color: white;
+}
+
+#comments-button span {
+    font-weight:bold;
+    font-size: 24px;
+}
+
+.dropup {
+    display:block;
+}
+
+.dropup-content {
+    display:none;
+    bottom: 100%;
+}
+
+.dropup-content ul {
+    list-style-type:none;
+    margin: -60px 0 0 87%;
+}
+
+.dropup-content li {
+    list-style-type:none;
+    display:block;
+    bottom: 100%;
+    width: 50%;
+    background-color: black;
+    text-align:center;
+}
+
+.dropup-content li a {
+    color: black;
+}
+
+.dropup-content li a:hover {
+    color: white;
+}
+
+.show {
+    display: block;
+}
+
+#navbar-floating {
+    float:left; 
+    background-color:black; 
+    position:fixed; 
+    z-index:1; 
+    overflow:hidden;
+ }
+
+.footer {
+    height: 36px;
+    position:fixed;
+    bottom: 0px;
+    float:left;
+    background:rgba(44, 44, 55, 0);
+}
+
+.footer-wrapper {
+    max-height:25%; 
+}
+
+#navbar-code:hover, #md-navbar-code:hover {
+    background-color: #DDDDDD;
+}
+
+#navbar-code a, #md-navbar-code a {
+    color: black;
+    //text-decoration: underline;
+}
+
+@media (min-width: 832px) {
+    .footer {
+        width:85%;
+    }
+
+    #navbar-floating {
+        width:70%;
+        height:50px;
+    }
+
+    #navbar-code, #md-navbar-code {
+        float:left;
+        font-size:24;
+        color: black;
+        padding: 5px 15px 5px 15px;
+    }
+
+    .footer-media-icons span, .footer-other-icons span {
+        float: right;
+        margin: 0 -5px 0 -5px;
+        color:white;
+    }
+
+    .footer-media-icons, .footer-other-icons {
+        margin: -25px 0 0 0;
+        font-size: 24px;
+    }
+
+    .footer-object {
+        padding: 0 35px 0 35px;
+        width: 50px;
+        float:left;
+    }
+
+    .footer-object span {
+        color:#BBBBBB;
+        padding: 0 0 0 28px;
+        font-size: 24px;
+    }
+
+    .footer-text {
+        color: black;
+        font-size:12;
+    }
+
+    #footer-left-black {
+        float:right;
+    }
+}
+
+@media (max-width: 832px) {
+    .footer {
+        width:100%;
+    }
+
+    #navbar-floating {
+        height:25px;
+        width:100%;
+    }
+
+    #navbar-static {
+        display:none;
+    }
+
+    #navbar-code {
+        float: left;
+        font-size:14;
+        color: black;
+        padding: 0 5px 0 5px;
+    }
+
+    .footer-media-icons span, .footer-other-icons span {
+        display:none;
+    }
+
+    .footer-text, .footer-other-icons, #md-navbar-code {
+        display: none;
+    }
+
+    #footer-left-black {
+        display: none;
+    }
+
+    .footer span {
+        display: none;
+    }
+
+    .footer-object span {
+        color:#BBBBBB;
+        margin-left: 100%;
+        padding: 0 0 0 21px;
+        font-size: 24px;
+    }
+
+}

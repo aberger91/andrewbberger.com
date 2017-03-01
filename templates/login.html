@@ -1,0 +1,22 @@
+{% include 'header.html' %}
+
+<div class="container-custom" style='margin-top:5%'>
+
+    <div class='title'>
+        Login
+    </div>
+    <hr>
+    
+    <form action="" class="form-inline" method="post">
+        <input type="text" class="form-control" placeholder = "Username" name="username" value="{{request.form.username}}">
+        <input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
+        <input id='base-color' class="btn btn-default" type="submit" value="Login">
+    </form>
+    
+    {% if error %}
+        <p class='error'><strong> Error: </strong> {{error}} </p>
+    {% endif %}
+    
+</div>
+
+{% include 'footer.html' %}

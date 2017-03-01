@@ -1,0 +1,87 @@
+<div id='title'>
+    Oanda FX API - Fetching Data
+    <hr>
+</div>
+
+<div id='text'>
+    In the previous tutorial we installed oanda_fx_api, created a practice account with Oanda,
+    and set some environment variables. Now we can run the following code:
+    <br>
+
+<div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">oanda_fx_api</span> <span class="kn">as</span> <span class="nn">ofx</span>
+                            
+<span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;EUR_USD&#39;</span>
+
+<span class="n">acc</span> <span class="o">=</span> <span class="n">ofx</span><span class="o">.</span><span class="n">Account</span><span class="p">()</span>
+<span class="n">dat</span> <span class="o">=</span> <span class="n">ofx</span><span class="o">.</span><span class="n">GetCandles</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">request</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">dat</span><span class="p">[[</span><span class="s1">&#39;closeBid&#39;</span><span class="p">,</span> <span class="s1">&#39;closeAsk&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+
+    <hr> <br>
+    ofx.GetCandles will give us OHLC bid and ask data. We can pass keyword arguments
+    to request up to 5000 bars with <code> count=5000 </code>, and change granularity with
+    <code> granularity='M1' </code> for different frequencies of data.
+    <br> <br>
+    The defaults are count=900 and granularity='S5', so right now we are looking at
+    75 minutes worth of pricing data for the Euro.
+    <br> <br>
+    If you wanted to do more of a time-restricted request, you can specify the start time
+    for the data:
+    <br>
+
+    <div class='highlight'><pre>
+    import datetime as dt
+    start = dt.datetime.now() - dt.timedelta(minutes=60)
+    </pre></div>
+    <br>
+    And then pass the keyword argument 'start' into GetCandles
+
+    <hr><br>
+    Here is what the output looks like on a Jupyter QTConsole with default arguments:
+    <br>
+
+    <div class='crop'>
+        <img src='{{url_for('static', filename='/images/ofx_intro_out.PNG')}}'>
+    </div>
+
+    <hr> <br>
+    Disclaimer - Since Oanda is a free service, we are receiving 'free' quality rates and spreads. 
+    <br> <br>
+</div>
+
+<div id='title'>
+    Visualizing the Data
+    <hr>
+</div>
+
+<div id='text'>
+
+    <hr> <br>
+    Visualize!
+    <br>
+
+    <div class='crop'>
+        <img src='{{ url_for('static',filename='/images/ofx_intro_out2.PNG')}}'>
+    </div>
+
+    <hr> <br>
+    Spread and volume statistics:
+    <br>
+
+    <div class='crop'>
+        <img src='{{ url_for('static',filename='/images/ofx_intro_out3.PNG')}}'>
+    </div>
+
+    <hr> <br>
+    With an average spread of 1.59 pips, we are definitely 'paying to play', but
+    remember this is just a practice account and it's a great way to great started
+    learning how to trade or learning about Python examples with pandas data structures.
+
+    <hr> <br>
+    Continue to the next tutorial!
+    <hr>
+
+</div>

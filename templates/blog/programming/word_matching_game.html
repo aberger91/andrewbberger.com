@@ -1,0 +1,254 @@
+<div id='title'>
+    Word Matching Game in Python
+    <br>
+    <pre><code> Andrew Berger Oct. 7, 2016 </code></pre>
+</div>
+<div id='text'> 
+
+    Recently while studying for the GRE, I found myself staring at lists of vocabulary words and definitions, 
+    wondering how I was going to cram all this information into my head! 
+
+    <br> <br> 
+
+    Instead of downloading another app on my phone or making flashcards for testing my vocab skills, 
+    I decided to test my Python skills as well and write my own word matching game! 
+
+    <hr>
+
+    The basic idea of this command line program takes advantage of two naturally unordered Python data structures.
+    We read vocabulary words from a CSV file, assigning words as keys and definitions as values
+    to a dictionary, and then <code> zip </code> two pairs of n words/definitions at a time,
+    the correct pairs with the definitions in a list, and the randomly ordered pairs as a <code> set </code>.
+
+    <br> <br>
+
+    This tutorial will demonstrate how I created my word matching game, assuming a limited
+    understanding of the Python programming language.
+
+    <div id='title'>
+        <br>
+        Materials
+    </div>
+
+    <strong> Required: </strong>
+    <br>
+    <li> a text editor </li>
+    <li> Python 3+ </li>
+    <hr>
+
+    First, let's create or download our vocabulary list. You could also make your own set of vocabulary words
+    by comma-separating by noun, verb, definition in a new file. 
+
+    <br> <br>
+
+    I happen to have some commonly-tested GRE words and definitions on a github repo: 
+
+    <a target='_blank' href='http://github.com/abberger1/word-matching-game'> github.com/abberger1/word-matching/game </a>
+
+    <br> <br>
+    <div class='highlight'><pre>
+    abscond,verb,to depart clandestinely; to steal off and hide <br>
+    aberrant,adj,deviating from the norm (aberration) <br>
+    alacrity,noun,eager and enthusiastic willingness <br>
+    anomaly,noun,deviation from the normal order form or rule; abnormality (anomalous) </pre></div>
+
+    <br> <br>
+
+    Note: commas in the definitions should be replaced by semi-colons (this will make life easier when parsing in Python)
+
+    <hr>
+
+    Open up a text editor and paste the following lines:
+
+    <br> <br>
+    <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">levels</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+
+    <hr> <br> 
+
+    Here we're importing the 'sys' module so we can pass an argument to our program from the command line.
+    The <code> sys.argv </code> variable is like an array of strings, with the first element containing the name of our 
+    program, and the rest of the container holding the arguments we pass via the command line.
+
+    <br> <br>
+
+    The "if __name__ == '__main__':" tells Python to run all of the code below when we call the interpreter 
+    with this file - it also assures that our code will not be run if we import this file into another Python program.
+
+    <br> <br>
+    
+<div class='highlight'><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_file</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">text</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+        <span class="n">words</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="n">number_of_words</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">words</span><span class="p">,</span> <span class="n">defs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>    
+</pre></div>    
+    
+    <hr><br>
+
+    In Python, the 'with' keyword is a context manager that activates the __enter__ special method for an object, in this case closing the file automatically for us.
+
+    <br> <br>
+
+    We're iterating through our file line-by-line, removing the newline character, and splitting the string into a list.
+    With our list we are able to store the first element as a key (string), and the rest of the data in the line as the value (list).
+
+    <br> <br>
+
+    In Python, dictionary keys are immutable, while values are mutable.
+    Dictionaries and their keys are <em> unordered </em> by default.
+
+    <br> <br>
+
+    Hence, with the two new lists from the keys and values we are 'randomizing' our vocabulary words.
+    This will enable us to re-play the game over and over without getting the same words each time!
+
+    <br> <br>
+
+    Next, we are going to start a while loop to start playing our game. This loop will end when the 'levels' of the game equals zero.
+
+    <br> <br>
+    
+<div class='highlight'><pre><span class="k">while</span> <span class="n">levels</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="n">vocab</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">counter</span><span class="p">:</span><span class="n">number_of_words</span><span class="o">+</span><span class="n">counter</span><span class="p">]</span>
+        <span class="n">definitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">defs</span><span class="p">[</span><span class="n">counter</span><span class="p">:</span><span class="n">number_of_words</span><span class="o">+</span><span class="n">counter</span><span class="p">]]</span>
+
+        <span class="n">correct_pairs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">definitions</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="n">jambled</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">definitions</span><span class="p">))),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">jambled</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">()</span>
+</pre></div>
+
+    <hr> <br>
+    The first thing we do in the while loop is subset our 'randomized' vocabulary pairs, selecting a group of them for the game.
+    The jambled words are only different because the definitions are a set, which is an unordered data type approximately equivalent to the keys of a dictionary.
+    Most importantly, we are able to scramble our vocabulary <em>definitions</em> 
+    using the unordered set while maintaining the correct order of <em>words</em> in lists.
+    We will use the correct order of words later to match our users' guesses to the correct definitions.
+    Our users' guesses will be an array of n integers that match the indices of the 
+    correct order of definitions in relation to the words on the screen!
+    <br> <br>
+    
+<div class='highlight'><pre>
+	<span class="n">correct_order</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">()</span>
+            
+        <span class="n">marks</span> <span class="o">=</span> <span class="p">[</span><span class="n">jambled</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">correct_order</span><span class="p">]</span>
+</pre></div>
+
+    <br> <br>
+    After receiving input, let's check if the player has given the correct answers:
+    <br> <br>
+    
+<div class='highlight'><pre>	
+	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_words</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">marks</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span>  <span class="n">correct_pairs</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">'correct'</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">correct_pairs</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    <hr> <br>
+    For each integer in the users' input, we check if the definition matches the definition in the correctly ordered pairs.
+    If the definition matches, we print 'correct', otherwise we print the correct word.
+    We're also going to keep track of how many rounds we've played by decrementing the 'levels'
+    Then increment 'counter' so we get another set of new words and definitions for the next round.
+    It's nice to print out the current score for the player now, too. 
+    <br> <br>
+
+<div class='highlight'><pre>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="n">number_of_words</span>
+        <span class="n">levels</span> <span class="o">-=</span> <span class="mi">1</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="s2">"score: </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">((</span><span class="n">score</span><span class="p">,</span> <span class="n">counter</span><span class="p">)))</span>
+        <span class="k">print</span><span class="p">()</span>
+</pre></div>
+
+    <hr> <br>
+    And that's it! We're done.
+
+    <br> <br>
+    To run our game, execute the following line in a terminal:
+    <br><br>
+    <div class='highlight'><pre> python word_matching_game.py words.txt </pre></div>
+    <hr><br>
+	
+    Some example output:
+    <br> <br>
+    <div class='crop'>
+        <img src=/static//images/word-matching-game-output.PNG>
+    </div>
+    <br> <br>
+    <div class='crop'>
+        <img src='/static//images/word-matching-game-output2.PNG'>
+    </div>
+    <hr> <br>
+
+    Here is the full source code: 
+    <br> <br>
+
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">levels</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_file</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+            <span class="n">words</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="n">number_of_words</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">words</span><span class="p">,</span> <span class="n">defs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    
+    <span class="k">while</span> <span class="n">levels</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="n">vocab</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">counter</span><span class="p">:</span><span class="n">number_of_words</span><span class="o">+</span><span class="n">counter</span><span class="p">]</span>
+        <span class="n">definitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">defs</span><span class="p">[</span><span class="n">counter</span><span class="p">:</span><span class="n">number_of_words</span><span class="o">+</span><span class="n">counter</span><span class="p">]]</span>
+
+        <span class="n">correct_pairs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">definitions</span><span class="p">))</span>
+        <span class="n">jambled</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">definitions</span><span class="p">)))</span>
+
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">jambled</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">()</span>
+
+        <span class="n">correct_order</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">()</span>
+            
+        <span class="n">marks</span> <span class="o">=</span> <span class="p">[</span><span class="n">jambled</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">correct_order</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_words</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">marks</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span>  <span class="n">correct_pairs</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">correct_pairs</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                    
+        <span class="n">counter</span> <span class="o">+=</span> <span class="n">number_of_words</span>
+        <span class="n">levels</span> <span class="o">-=</span> <span class="mi">1</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="s2">"score: </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">((</span><span class="n">score</span><span class="p">,</span> <span class="n">counter</span><span class="p">)))</span>
+        <span class="k">print</span><span class="p">()</span>
+</pre></div>
+</div>

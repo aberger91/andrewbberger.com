@@ -1,0 +1,44 @@
+<div class='container-custom' style="box-shadow:5px 10px 10px black; margin: 2% 25% 6% 25%">
+    <div class="row">
+
+    <div class='title' style="padding:10px 10px 10px 10px;"> 
+        <button type="button" id='comments-button'class="btn btn-default">
+            <span> Comment! </span>
+        </button>
+    </div>
+
+    {% if comments %}
+        <div>
+            {% for comment in comments[::-1] %}
+                <div class='panel panel-default'>
+                    <div style='color:midnightblue;font-weight:bold;float:left'>
+                        {{comment[0]}} 
+                    </div>
+                    <div style='color:midnightblue;font-weight:bold;float:right'>
+                        {{comment[2]}}
+                    </div>
+                    <br>
+                    <div id='text'>
+                        {{comment[1]}}
+                    </div>
+                    <br> 
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class='container-fluid' align='center'>
+        <form action='' class='form' method='post'>
+            {% if session.get('username') %}
+                @ {{ session.get('username') }}
+            {% else %}
+                @ Guest
+            {% endif %}
+            <textarea id='comments-textarea' style='display:none;height:0%; width:100%;' rows='2' cols='52' name='msg'></textarea> 
+            <br>
+            <input id='comments-submit' style='display:none;font-size:12px; margin-top:2%' class='base-color btn btn-default' type='submit' value='Submit'>
+        </form>
+    </div>
+</div>
+</div>
