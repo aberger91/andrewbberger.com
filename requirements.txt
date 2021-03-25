@@ -78,7 +78,7 @@ python-dateutil==2.6.0
 python-openid==2.2.5
 python2-pythondialog==3.3.0
 pytz==2016.10
-PyYAML==3.12
+PyYAML==5.4
 Quandl==3.0.1
 requests==2.12.4
 requests-file==1.4.1
