@@ -67,7 +67,7 @@ ptyprocess==0.5.1
 pyasn1==0.1.9
 pycparser==2.14
 PyECLib==1.2.0
-Pygments==2.1
+Pygments==2.7.4
 PyICU==1.9.2
 pyOpenSSL==0.15.1
 pyparsing==2.1.10
