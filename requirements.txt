@@ -88,7 +88,7 @@ scour==0.32
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
 six==1.10.0
-swift==2.7.0
+swift==2.15.2
 Tempita==0.5.2
 terminal-leetcode==0.0.7
 tornado==4.4.2
