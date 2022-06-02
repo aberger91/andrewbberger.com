@@ -27,7 +27,7 @@ futures==3.0.5
 great-good==0.1
 greenlet==0.4.9
 hello-garf==0.1
-html5lib==0.999
+html5lib==0.99999999
 idna==2.0
 inflection==0.3.1
 ipaddress==1.0.16
